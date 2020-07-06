@@ -8,17 +8,23 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "watch 'yarn run build' src",
-    "build": "parcel build src/*.html --no-content-hash"
+    "dev": "webpack --watch",
+    "build": "webpack build"
   },
   "devDependencies": {
-    "parcel": "^1.12.4",
-    "parcel-plugin-static-files-copy": "^2.4.3",
-    "watch": "^1.0.2"
-  },
-  "staticFiles": {
-    "staticPath": "src",
-    "watcherGlob": "**",
-    "excludeGlob": ["src/lib", "src/{background,options,popup}\/.js"]
+    "@babel/core": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "css-loader": "^3.6.0",
+    "glob": "^7.1.6",
+    "happypack": "^5.0.1",
+    "html-webpack-plugin": "^4.3.0",
+    "less-loader": "^6.2.0",
+    "os": "^0.1.1",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^1.2.1",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
   }
 }
