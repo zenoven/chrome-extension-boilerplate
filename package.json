@@ -1,0 +1,24 @@
+{
+  "name": "chrome-extension-boilerplate",
+  "version": "1.0.0",
+  "description": "Chrome extension boilerplate",
+  "main": "index.js",
+  "repository": "git@github.com:zenoven/chrome-extension-boilerplate.git",
+  "author": "zenoven <zenoven@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "watch 'yarn run build' src",
+    "build": "parcel build src/*.html --no-content-hash"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.4.3",
+    "watch": "^1.0.2"
+  },
+  "staticFiles": {
+    "staticPath": "src",
+    "watcherGlob": "**",
+    "excludeGlob": ["src/lib", "src/{background,options,popup}\/.js"]
+  }
+}
