@@ -1,15 +1,16 @@
 const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HappyPack = require('happypack');
-const path = require('path')
-const HTMLWebpackPlugin = require("html-webpack-plugin")
+const path = require('path');
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const os = require('os');
-const glob = require('glob')
+const glob = require('glob');
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 const root = path.join(__dirname, './');
 const srcPath = path.join(root, 'src');
 const distPath = path.join(root, 'dist');
-
+const env = process.env.NODE_ENV || 'development';
 const entry = {};
 
 glob.sync('*.html', { cwd: srcPath })
@@ -31,8 +32,7 @@ const getExtraPlugins = () => {
   return HTMLWebpackInstances;
 }
 module.exports = {
-  mode: 'production',
-  watch: true,
+  mode: env,
   entry,
   context: srcPath,
   output: {
@@ -87,6 +87,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json', '.less'],
   },
   plugins: [
+    env === 'production' && new CleanWebpackPlugin(),
     new HappyPack({
       id: 'js',
       loaders: ['babel-loader'],
@@ -179,6 +180,12 @@ module.exports = {
         }
       ]
     }),
-  ].concat(getExtraPlugins()),
+  ].concat(getExtraPlugins()).filter(x => x),
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: 'common',
+    },
+  },
 
 };
