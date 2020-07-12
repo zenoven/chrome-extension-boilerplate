@@ -24,9 +24,9 @@ const env = process.env.NODE_ENV || 'development';
 const watcher = env === 'development' && chokidar.watch(path.join(srcPath, 'language.json'));
 
 function logTime(promiseBuilder, label) {
-  let promise = promiseBuilder();
   label = label || promiseBuilder.name;
   return () => {
+    let promise = promiseBuilder();
     signale.time(label);
     return promise.then(() => {
       signale.timeEnd(label);
@@ -72,29 +72,11 @@ function bundle() {
 function zip() {
   const now = Date.now();
   const fileName = `${name}-${version}-${now}.zip`;
-  const tmpPath = `tmp-${now}`;
-  return fs.mkdirp(`${root}/${tmpPath}`)
-    .then(() => {
-      return bestzip({
-        source: './*',
-        destination: path.join(`${root}/${tmpPath}`, fileName),
-        cwd: distPath,
-      })
-    })
-    .then(() => {
-      return fs.pathExists(path.join(`${root}/${tmpPath}`, fileName))
-    })
-    .then((exists) => {
-      if (!exists) throw ('111');
-      return fs.move(path.join(`${root}/${tmpPath}`, fileName), path.join(distPath, fileName));
-    })
-    .then(() => {
-      return fs.remove(tmpPath);
-    })
-    .catch(function (err) {
-      console.error(err.stack);
-      process.exit(1);
-    })
+  return bestzip({
+    source: './*',
+    destination: path.join(distPath, fileName),
+    cwd: distPath,
+  });
 }
 
 function build() {
