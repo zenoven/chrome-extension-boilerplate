@@ -1,50 +1,50 @@
 {
-    "meta": {
-        "format": "monolith",
-        "dest": "./src/_locales/",
-        "locales": [ "en", "zh_CN" ]
+  "meta": {
+    "format": "monolith",
+    "dest": "./dist/_locales/",
+    "locales": ["en", "zh_CN"]
+  },
+  "database": {
+    "extName": {
+      "description": "extension name",
+      "locales": {
+        "en": "Tab Stasher",
+        "zh_CN": "暂存标签"
+      }
     },
-    "database": {
-        "extName": {
-            "description": "extension name",
-            "locales": {
-                "en": "Tab Stasher",
-                "zh_CN": "暂存标签"
-            }
-        },
-        "extDescription": {
-            "description": "extension description",
-            "locales": {
-                "en": "Tab Stasher can stash all your tabs with one click. You can also manage your stash list or tabs within the extension popup",
-                "zh_CN": "暂存标签插件可以一键将当前窗口中所有已打开的标签页暂存，您还可以在插件的小窗口中管理所有已保存的记录。"
-            }
-        },
-        "extMenuTitle": {
-            "description": "Right click Menu Title",
-            "locales": {
-                "en": "stash all tabs",
-                "zh_CN": "暂存标签"
-            }
-        },
-        "StashSummary": {
-            "description": "Summary info of how many stash groups and tabs",
-            "placeholders": {
-                "groupsCount": {
-                    "content": "$1",
-                    "example": "10"
-                },
-            },
-            "locales": {
-                "en": "$GroupsCount$ stash groups and $TabsCount$ tabs.",
-                "zh_CN": "当前共$GroupsCount$组，$TabsCount$个tab"
-            }
-        },
-        "Options": {
-            "description": "Options",
-            "locales": {
-                "en": "Options",
-                "zh_CN": "选项"
-            }
+    "extDescription": {
+      "description": "extension description",
+      "locales": {
+        "en": "Tab Stasher can stash all your tabs with one click. You can also manage your stash list or tabs within the extension popup",
+        "zh_CN": "暂存标签插件可以一键将当前窗口中所有已打开的标签页暂存，您还可以在插件的小窗口中管理所有已保存的记录。"
+      }
+    },
+    "extMenuTitle": {
+      "description": "Right click Menu Title",
+      "locales": {
+        "en": "stash all tabs",
+        "zh_CN": "暂存标签"
+      }
+    },
+    "StashSummary": {
+      "description": "Summary info of how many stash groups and tabs",
+      "placeholders": {
+        "groupsCount": {
+          "content": "$1",
+          "example": "10"
         }
+      },
+      "locales": {
+        "en": "$GroupsCount$ stash groups",
+        "zh_CN": "当前共$GroupsCount$组"
+      }
+    },
+    "Options": {
+      "description": "Options",
+      "locales": {
+        "en": "Options",
+        "zh_CN": "选项"
+      }
     }
+  }
 }

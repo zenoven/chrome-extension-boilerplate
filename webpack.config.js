@@ -10,8 +10,10 @@ const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 const root = path.join(__dirname, './');
 const srcPath = path.join(root, 'src');
 const distPath = path.join(root, 'dist');
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'production';
 const entry = {};
+// const execa = require('execa');
+// execa.commandSync('chrome-i18n -f ' + srcPath + '/language.json')
 
 glob.sync('*.html', { cwd: srcPath })
   .forEach((filePath) => {
