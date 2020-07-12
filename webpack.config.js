@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HappyPack = require('happypack');
 const path = require('path');
 const HTMLWebpackPlugin = require("html-webpack-plugin");
@@ -10,7 +9,7 @@ const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 const root = path.join(__dirname, './');
 const srcPath = path.join(root, 'src');
 const distPath = path.join(root, 'dist');
-const env = process.env.NODE_ENV || 'production';
+const env = process.env.NODE_ENV || 'development';
 const entry = {};
 // const execa = require('execa');
 // execa.commandSync('chrome-i18n -f ' + srcPath + '/language.json')
@@ -41,7 +40,7 @@ module.exports = {
     path: distPath,
     filename: '[name].bundle.js'
   },
-
+  watch: env === 'development',
   module: {
     rules: [
       {
@@ -89,7 +88,6 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json', '.less'],
   },
   plugins: [
-    env === 'production' && new CleanWebpackPlugin(),
     new HappyPack({
       id: 'js',
       loaders: ['babel-loader'],
