@@ -1,4 +1,4 @@
-import Promise, { reject } from 'bluebird';
+import Promise from 'bluebird';
 
 export const c = Object.assign({}, chrome);
 

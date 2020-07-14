@@ -1,3 +1,3 @@
-import { getAllTabs, windows, c } from 'lib/util';
+import { getAllTabs } from 'lib/util';
 
-getAllTabs().then(tabs => console.log('tabs:', tabs))
+getAllTabs().then(tabs => console.log('tabs:', tabs));
