@@ -41,6 +41,7 @@ module.exports = {
     filename: '[name].bundle.js'
   },
   watch: env === 'development',
+  devtool: env === 'development' && 'eval-source-map',
   module: {
     rules: [
       {
