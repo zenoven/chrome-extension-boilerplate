@@ -6,7 +6,7 @@ A boilerplate for Chrome extension with:
 
 ## How to
 
-### create a new extension
+### Create a new extension
 1. clone project
 
 `git clone git@github.com:zenoven/chrome-extension-boilerplate.git`
@@ -20,7 +20,7 @@ yarn install
 yarn dev
 ```
 
-### setup Chrome extensions
+### Setup Chrome extensions
 
 1. Open the Extension Management page by navigating to `chrome://extensions`
   - The Extension Management page can also be opened by clicking on the Chrome menu, hovering over More Tools then selecting Extensions.
@@ -29,8 +29,11 @@ yarn dev
 
 for more details just visit https://developer.chrome.com/extensions/getstarted#manifest
 
-### build
+### Build
 ```
 yarn build
 ```
 now all the dist files are under `./dist` and you can also find the zip file there.
+
+### License
+the MIT License.
