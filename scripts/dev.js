@@ -27,9 +27,11 @@ function logTime(promiseBuilder, label) {
   label = label || promiseBuilder.name;
   return () => {
     let promise = promiseBuilder();
-    signale.time(label);
+    signale.start(label);
+    let start = Date.now();
     return promise.then(() => {
-      signale.timeEnd(label);
+      let duration = ((Date.now() - start) / 1000).toFixed(2) + 's';
+      signale.success(`${label} done in ${duration}.`);
     });
   }
 }
