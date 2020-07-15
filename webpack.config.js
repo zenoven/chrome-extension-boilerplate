@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const HappyPack = require('happypack');
 const path = require('path');
-const HTMLWebpackPlugin = require("html-webpack-plugin");
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const os = require('os');
 const glob = require('glob');
@@ -11,8 +11,6 @@ const srcPath = path.join(root, 'src');
 const distPath = path.join(root, 'dist');
 const env = process.env.NODE_ENV || 'development';
 const entry = {};
-// const execa = require('execa');
-// execa.commandSync('chrome-i18n -f ' + srcPath + '/language.json')
 
 glob.sync('*.html', { cwd: srcPath })
   .forEach((filePath) => {
@@ -25,7 +23,7 @@ const getExtraPlugins = () => {
     return new HTMLWebpackPlugin({
       filename: chunk + '.html',
       template: chunk + '.html',
-      minify: true,
+      minify: env === 'production',
       inject: 'body',
       chunks: [chunk]
     });

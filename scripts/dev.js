@@ -16,15 +16,14 @@ const srcPath = path.join(root, 'src');
 const distPath = path.join(root, 'dist');
 const config = require('../webpack.config');
 const bestzip = require('bestzip');
-const devPort = 3388;
 const {
   name,
   version,
 } = packageJSON;
 const env = process.env.NODE_ENV || 'development';
-
+const devPort = packageJSON.devConfig.port;
 const watcher = env === 'development' && chokidar.watch(path.join(srcPath, 'language.json'));
-const stats = {
+const statsConfig = {
   colors: true,
   timings: true,
   hash: true,
@@ -85,17 +84,17 @@ function bundle() {
     if (env === 'development') {
       let devServer = new WebpackDevServer(compiler, {
         ...devServerConfig,
-        stats,
+        stats: statsConfig,
         after(app, server, compiler) {
           resolve();
           app.on('error', reject);
         }
       });
-      devServer.listen(devServerConfig.port);
+      devServer.listen(devPort);
     } else {
-      compiler.run((err, statsInfo) => {
+      compiler.run((err, stats) => {
         if (err || stats.hasErrors()) {
-          signale.info(statsInfo.toString(stats));
+          signale.info(stats.toString(statsConfig));
           return reject(err);
         }
         resolve(stats);
