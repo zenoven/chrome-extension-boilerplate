@@ -94,8 +94,11 @@ function bundle() {
       devServer.listen(devServerConfig.port);
     } else {
       compiler.run((err, statsInfo) => {
-        signale.info(statsInfo.toString(stats));
-        reject(err);
+        if (err || stats.hasErrors()) {
+          signale.info(statsInfo.toString(stats));
+          return reject(err);
+        }
+        resolve(stats);
       });
     }
   })
