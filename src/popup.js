@@ -1,14 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'main';
 
-const render = (Component) => {
-  ReactDOM.hydrate(<Component />, document.getElementById('app'))
-}
+render()
 
-render(() => {
-  return <div>hello</div>
-})
-
-if (typeof module.hot !== 'undefined') {
-  module.hot.accept();
-}

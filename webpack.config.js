@@ -11,11 +11,16 @@ const srcPath = path.join(root, 'src');
 const distPath = path.join(root, 'dist');
 const env = process.env.NODE_ENV || 'development';
 const entry = {};
+const noReactHotLoaderChunks = ['background'];
 
 glob.sync('*.html', { cwd: srcPath })
   .forEach((filePath) => {
-    let chunk = filePath.slice(0, path.extname(filePath).length * -1)
-    entry[chunk] = [`./${chunk}`];
+    let chunk = filePath.slice(0, path.extname(filePath).length * -1);
+    let result = [`./${chunk}`];
+    entry[chunk] = result;
+    if (!noReactHotLoaderChunks.includes(chunk)) {
+      entry[chunk] = ['react-hot-loader/patch'].concat(result);
+    }
   })
 
 const getExtraPlugins = () => {
@@ -42,11 +47,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.jsx$/,
         exclude: /node_modules/,
         loader: 'happypack/loader',
         options: {
-          id: 'js'
+          id: 'jsx'
         }
       },
       // 项目内源码样式，使用css modules
@@ -88,7 +93,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HappyPack({
-      id: 'js',
+      id: 'jsx',
       loaders: ['babel-loader'],
       threadPool: happyThreadPool,
       verbose: true,
