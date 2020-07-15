@@ -30,7 +30,6 @@ const getExtraPlugins = () => {
       chunks: [chunk]
     });
   });
-  return HTMLWebpackInstances;
 }
 module.exports = {
   mode: env,
@@ -89,6 +88,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json', '.less'],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HappyPack({
       id: 'js',
       loaders: ['babel-loader'],

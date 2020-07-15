@@ -22,6 +22,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^3.6.0",
+    "dev-ip": "^1.0.1",
     "execa": "^4.0.3",
     "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
@@ -34,7 +35,8 @@
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "react": "^16.13.1",

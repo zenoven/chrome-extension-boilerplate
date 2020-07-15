@@ -8,3 +8,7 @@ const render = (Component) => {
 render(() => {
   return <div>hello</div>
 })
+
+if (typeof module.hot !== 'undefined') {
+  module.hot.accept();
+}

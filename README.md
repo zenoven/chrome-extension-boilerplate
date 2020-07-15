@@ -1,6 +1,6 @@
 # Chrome extension boilerplate
 A boilerplate for Chrome extension with:
-- `i18n` support
+- built-in `i18n` support
 - `react`
 - promisified chrome APIs
 
