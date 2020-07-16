@@ -39,9 +39,11 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@rematch/core": "^1.4.0",
     "react": "^16.13.1",
     "react-dom": "npm:@hot-loader/react-dom",
-    "react-hot-loader": "^4.12.21"
+    "react-hot-loader": "^4.12.21",
+    "react-redux": "^7.2.0"
   },
   "devConfig": {
     "port": 3388
