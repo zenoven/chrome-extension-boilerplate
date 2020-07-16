@@ -1,11 +1,9 @@
-// import { getAllTabs } from 'lib/util';
+import { getAllTabs } from 'lib/util';
 
-console.log('get all tabs');
-// getAllTabs().then(tabs => {
-//   console.log('get all tabs');
-//   console.log(tabs.length);
-// })
+getAllTabs().then(tabs => {
+  console.log('hello:', tabs);
+})
 
-// if (typeof module.hot !== 'undefined') {
-//   module.hot.accept();
-// }
+if (typeof module.hot !== 'undefined') {
+  module.hot.accept();
+}

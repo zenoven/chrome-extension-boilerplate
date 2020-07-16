@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react-dom": "npm:@hot-loader/react-dom",
     "react-hot-loader": "^4.12.21"
   },
   "devConfig": {

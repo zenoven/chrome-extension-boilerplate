@@ -13,7 +13,7 @@
 
   "permissions": ["contextMenus", "tabs", "storage"],
   "background": {
-    "scripts": ["background.bundle.js"]
+    "page": "background.html"
   },
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

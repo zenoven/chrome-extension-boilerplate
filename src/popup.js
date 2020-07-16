@@ -1,4 +1,8 @@
 import {render} from 'main';
 
-render()
+render();
+
+if (typeof module.hot !== 'undefined') {
+  module.hot.accept();
+}
 

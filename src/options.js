@@ -2,8 +2,8 @@ import { getAllTabs } from 'lib/util';
 import {render} from 'main';
 
 render();
+getAllTabs().then(tabs => console.log('tabs:', tabs));
 
-getAllTabs().then(tabs => {
-  console.log('s水电费')
-  console.log('tabs:', tabs)
-});
+if (typeof module.hot !== 'undefined') {
+  module.hot.accept();
+}
