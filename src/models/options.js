@@ -4,18 +4,17 @@ export default {
   }, // initial state
   reducers: {
     // handle state changes with pure functions
-    increment(state, payload) {
-      let count = state.count + payload;
-      return { ...state, count};
+    add(state, payload) {
+      state.count += payload;
     },
   },
   effects: {
     // handle state changes with impure functions.
     // use async/await for async actions
-    async incrementAsync(payload, rootState) {
+    async addAsync(payload, rootState) {
       console.log(rootState)
       await new Promise(resolve => setTimeout(resolve, 1000))
-      this.increment(payload)
+      this.add(payload)
     },
   },
 }

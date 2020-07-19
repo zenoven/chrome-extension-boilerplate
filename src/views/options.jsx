@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 const Options = ({ dispatch, options }) => {
-  console.log('options:', options);
+  const [addAmount, setAddAmount] = useState(1);
   return (
     <div>
-      <span>options here</span>
-      <span style={{margin: '10px'}}>{options.count}</span>
-      <button onClick={() => dispatch({ type: 'options/increment', payload: 1})}>add</button>
+      <div style={{ margin: '10px 0' }}>
+        count is:{options.count}
+      </div>
+      <div>
+        <button onClick={() => dispatch({ type: 'options/addAsync', payload: addAmount })}>add</button>
+        <input type="text" value={addAmount} onChange={(e) => setAddAmount(+e.target.value)} /> after 1 second
+      </div>
     </div>
   );
 }
