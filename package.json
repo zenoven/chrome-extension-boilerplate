@@ -41,6 +41,7 @@
   "dependencies": {
     "@rematch/core": "^1.4.0",
     "@rematch/immer": "^1.2.0",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^16.13.1",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-hot-loader": "^4.12.21",

@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-const Options = ({ dispatch, options }) => {
-  const [addAmount, setAddAmount] = useState(1);
+const Options = ({ dispatch, readhub }) => {
+  console.log('readhub:', readhub);
+  const { topics } = readhub;
   return (
     <div>
-      <div style={{ margin: '10px 0' }}>
-        count is:{options.count}
-      </div>
+      <ul>
+        {
+          topics.map(topic => {
+            return (
+              <li key={topic.id}>
+                {topic.summary}
+              </li>
+            )
+          })
+        }
+      </ul>
       <div>
-        <button onClick={() => dispatch({ type: 'options/addAsync', payload: addAmount })}>add</button>
-        <input type="text" value={addAmount} onChange={(e) => setAddAmount(+e.target.value)} /> after 1 second
+        <button onClick={() => dispatch({ type: 'readhub/fetchTopics' })}>Fetch topics</button>
       </div>
     </div>
   );
 }
 
-export default connect(({ options }) => ({
-  options,
+export default connect(({ readhub }) => ({
+  readhub,
 }))(Options);

@@ -11,7 +11,7 @@
   },
   "options_page": "options.html",
 
-  "permissions": ["contextMenus", "tabs", "storage"],
+  "permissions": ["contextMenus", "tabs", "storage", "https://api.readhub.cn/*"],
   "background": {
     "page": "background.html"
   },
