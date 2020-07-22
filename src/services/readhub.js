@@ -1,14 +1,8 @@
-import fetch from '../lib/fetch';
-const prefix = 'https://api.readhub.cn';
-const fetchWithPrefix = (...args) => {
-  let url = args[0];
-  url = prefix + url;
-  // console.log('url:', url, 'args')
-  return fetch(url, ...(args.slice(1)));
-}
+import {fetchWithPrefix} from '../lib/util';
+const fetch = fetchWithPrefix('https://api.readhub.cn');
 
 export function getTopics(data) {
-  return fetchWithPrefix('/topic?lastCursor=&pageSize=20', {
+  return fetch('/topic?lastCursor=&pageSize=20', {
     method: 'GET',
     data
   });

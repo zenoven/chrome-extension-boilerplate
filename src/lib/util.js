@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import fetch from './fetch';
 
 export const c = Object.assign({}, chrome);
 
@@ -24,4 +25,10 @@ export const getAllTabs = () => {
   return c.windows.getCurrentAsync().then((win) => {
     return c.tabs.queryAsync({ windowId: win.id });
   });
+};
+
+export const fetchWithPrefix = (prefix) => (...args) => {
+  let url = args[0];
+  url = prefix + url;
+  return fetch(url, ...(args.slice(1)));
 };

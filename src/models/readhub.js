@@ -13,9 +13,7 @@ export default {
     // handle state changes with impure functions.
     // use async/await for async actions
     async fetchTopics(payload, rootState) {
-      console.log(rootState)
       let response = await getTopics() || [];
-      console.log('response:', response);
       this.updateTopics(response.data);
     },
   },

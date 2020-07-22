@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 const Options = ({ dispatch, readhub }) => {
-  console.log('readhub:', readhub);
   const { topics } = readhub;
   return (
     <div>
