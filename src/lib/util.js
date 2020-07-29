@@ -1,7 +1,11 @@
 import Promise from 'bluebird';
 import fetch from './fetch';
-
+import * as dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
+import relativeTime from 'dayjs/plugin/relativeTime';
 export const c = Object.assign({}, chrome);
+dayjs.extend(relativeTime);
+dayjs.locale('zh-cn');
 
 const promisifiedChromeAPIs = ['windows', 'tabs', 'browserAction'];
 const promisifier = (method) => {
@@ -32,3 +36,5 @@ export const fetchWithPrefix = (prefix) => (...args) => {
   url = prefix + url;
   return fetch(url, ...(args.slice(1)));
 };
+
+export {dayjs};

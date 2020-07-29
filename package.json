@@ -42,6 +42,7 @@
   "dependencies": {
     "@rematch/core": "^1.4.0",
     "@rematch/immer": "^1.2.0",
+    "dayjs": "^1.8.31",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.13.1",
     "react-dom": "npm:@hot-loader/react-dom",

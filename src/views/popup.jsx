@@ -1,52 +1,67 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import {dayjs} from 'lib/util';
+
 const TopicList = styled.ul`
   width: 400px;
-  margin: 16px;
+  margin: 0;
   padding: 0;
   font-size: 14px;
 `;
 const Topic = styled.li`
   list-style: none;
   padding: 16px;
-  color: #666;
+  color: #777;
+  transition: all .15s ease-in-out;
   & + & {
     border-top: 1px solid #eee;
+  }
+  &:hover {
+    color: #555;
+    background: #fafafa;
   }
 `;
 Topic.Title = styled.h3`
   margin: 0;
   line-height: 1.5;
   list-style: none;
-  color: #444;
-  word-break: break-all;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #555;
   cursor: pointer;
   font-size: 14px;
+  ${Topic}:hover & {
+    color: #333;
+  }
+`;
+Topic.TitleContent = styled.span`
+  margin-right: 8px;
+`;
+Topic.PublishTime = styled.span`
+  font-size: 12px;
+  color: #888;
+  font-weight: normal;
 `;
 Topic.Summary = styled.div`
-  margin-top: 20px;
-  display: ${props => !props.folded ? 'block' : 'none'};
+  display: ${props => !props.folded ? '-webkit-box' : 'none'};
+  -webkit-box-orient: vertical;
+  margin-top: 10px;
   font-size: 12px;
+  line-height: 18px;
+  height: 54px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
 `;
-Topic.Summary.defaultProps = {
-  folded: true,
-};
 
-const toggleSummaryFolded = ({ summaryFoldedMap, topic }) => {
-  let oldFolded = typeof summaryFoldedMap[topic.id] === 'undefined' || summaryFoldedMap[topic.id];
-  return { ...summaryFoldedMap, [topic.id]: !oldFolded};
+const timeAgo = (anchor) => {
+  let now = dayjs();
+  return now.to(dayjs(anchor));
 }
-
 
 const Options = ({ dispatch, readhub }) => {
   useEffect(() => {
     dispatch({ type: 'readhub/fetchTopics' });
   }, [])
-  const [summaryFoldedMap, updateSummaryFoldedMap] = useState({});
   const { topics } = readhub;
   return (
     <div>
@@ -55,11 +70,11 @@ const Options = ({ dispatch, readhub }) => {
           topics.map(topic => {
             return (
               <Topic key={topic.id}>
-                <Topic.Title
-                  title={topic.title}
-                  onClick={() => updateSummaryFoldedMap(toggleSummaryFolded({ summaryFoldedMap, topic }))}
-                >{topic.title}</Topic.Title>
-                <Topic.Summary folded={summaryFoldedMap[topic.id]}>{topic.summary}</Topic.Summary>
+                <Topic.Title title={topic.title}>
+                  <Topic.TitleContent>{topic.title}</Topic.TitleContent>
+                  <Topic.PublishTime>{timeAgo(topic.createdAt)}</Topic.PublishTime>
+                </Topic.Title>
+                <Topic.Summary>{topic.summary}</Topic.Summary>
               </Topic>
             )
           })
