@@ -1,11 +1,21 @@
 import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import Options from 'views/options';
+import Popup from 'views/popup';
+import '../assets/styles/base.less';
+const routes = {
+  options: {
+    View: Options,
+  },
+  popup: {
+    View: Popup,
+  }
+};
 
-
-const APP = () => {
+const APP = ({path}) => {
+  let { View } = routes[path];
   return (
-    <Options></Options>
+    <View />
   )
 };
 

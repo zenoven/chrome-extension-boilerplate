@@ -14,6 +14,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
+    "autoprefixer": "^9.8.5",
     "babel-loader": "^8.1.0",
     "bestzip": "^2.1.5",
     "bluebird": "^3.7.2",
@@ -45,7 +46,8 @@
     "react": "^16.13.1",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-hot-loader": "^4.12.21",
-    "react-redux": "^7.2.0"
+    "react-redux": "^7.2.0",
+    "styled-components": "^5.1.1"
   },
   "devConfig": {
     "port": 3388

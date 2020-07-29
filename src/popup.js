@@ -1,6 +1,6 @@
 import {render} from 'main';
 
-render();
+render('popup');
 
 if (typeof module.hot !== 'undefined') {
   module.hot.accept();

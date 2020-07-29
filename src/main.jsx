@@ -12,11 +12,11 @@ const store = init({
   plugins: [immer],
 });
 
-export const render = () => {
+export const render = (path) => {
   ReactDOM.render(
     (
       <Provider store={store}>
-        <APP />
+        <APP path={path} />
       </Provider>
     ),
     document.getElementById('app')

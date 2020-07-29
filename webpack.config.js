@@ -109,29 +109,22 @@ module.exports = {
           loader: 'css-loader',
           options: {
             sourceMap: true,
-            modules: true,
+            modules: {
+              localIdentName: '[name]__[local]--[hash:base64:5]',
+            },
             import: true,
-            localIdentName: '[name]__[local]--[hash:base64:5]',
+
             importLoaders: 1,
           }
         },
         {
           loader: 'postcss-loader',
-          options: {
-            config: {
-              ctx: {
-                cssnext: {},
-                cssnano: {},
-                autoprefixer: {}
-              }
-            }
-          }
         },
         {
           loader: 'less-loader',
           options: {
             sourceMap: true,
-            javascriptEnabled: true
+            // javascriptEnabled: true
           },
         }
       ],
@@ -153,15 +146,6 @@ module.exports = {
         },
         {
           loader: 'postcss-loader',
-          options: {
-            config: {
-              ctx: {
-                cssnext: {},
-                cssnano: {},
-                autoprefixer: {}
-              }
-            }
-          }
         },
         {
           loader: 'less-loader',
