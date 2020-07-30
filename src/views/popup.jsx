@@ -33,10 +33,13 @@ Topic.Title = styled.h3`
     color: #333;
   }
 `;
-Topic.TitleContent = styled.span`
+Topic.TitleContent = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-right: 8px;
 `;
-Topic.PublishTime = styled.span`
+Topic.PublishTime = styled.div`
   font-size: 12px;
   color: #888;
   font-weight: normal;
