@@ -21,6 +21,7 @@ const Topic = styled.li`
     color: #555;
     background: #fafafa;
   }
+  ${props => props.read ? 'opacity: .5' : ''}
 `;
 Topic.Title = styled.h3`
   margin: 0;
@@ -65,14 +66,23 @@ const Options = ({ dispatch, readhub }) => {
   useEffect(() => {
     dispatch({ type: 'readhub/fetchTopics' });
   }, [])
-  const { topics } = readhub;
+  const {
+    topics,
+    status: {
+      read
+    }
+  } = readhub;
   return (
     <div>
       <TopicList>
         {
           topics.map(topic => {
             return (
-              <Topic key={topic.id}>
+              <Topic
+                key={topic.id}
+                onClick={() => dispatch({ type: 'readhub/markRead', payload: topic.id })}
+                read={read.includes(topic.id)}
+              >
                 <Topic.Title title={topic.title}>
                   <Topic.TitleContent>{topic.title}</Topic.TitleContent>
                   <Topic.PublishTime>{timeAgo(topic.createdAt)}</Topic.PublishTime>
