@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import {dayjs} from 'lib/util';
 
-const TopicList = styled.ul`
+const Popup = styled.div`
+  position: relative;
   width: 400px;
   margin: 0;
   padding: 0;
   font-size: 14px;
+`;
+const TopicList = styled.ul`
+  margin: 0;
+  padding: 0;
 `;
 const Topic = styled.li`
   list-style: none;
@@ -57,23 +62,43 @@ Topic.Summary = styled.div`
   -webkit-line-clamp: 3;
 `;
 
+const Footer = styled.div`
+  position: absolute;
+  width: 100px;
+  height: 400px;
+  left: 0;
+  bottom: 0;
+  visibility: hidden;
+`;
+
 const timeAgo = (anchor) => {
   let now = dayjs();
   return now.to(dayjs(anchor));
 }
 
+
 const Options = ({ dispatch, readhub }) => {
+  const {
+    topics,
+    read,
+    loading,
+  } = readhub;
+  const footerRef = useRef(null);
   useEffect(() => {
     dispatch({ type: 'readhub/fetchTopics' });
   }, [])
-  const {
-    topics,
-    status: {
-      read
-    }
-  } = readhub;
+  useEffect(() => {
+    let intersectionObserver = new IntersectionObserver((changes) => {
+      if (!changes[0].isIntersecting) return;
+      dispatch({ type: 'readhub/fetchTopics' });
+    }, {
+      threshold: .2,
+    });
+    intersectionObserver.observe(footerRef.current);
+  }, []);
+
   return (
-    <div>
+    <Popup>
       <TopicList>
         {
           topics.map(topic => {
@@ -93,7 +118,8 @@ const Options = ({ dispatch, readhub }) => {
           })
         }
       </TopicList>
-    </div>
+      <Footer ref={footerRef} />
+    </Popup>
   );
 }
 
