@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import {dayjs} from 'lib/util';
+import { dayjs } from 'lib/util';
+import Modal from '../component/modal';
 
 const Popup = styled.div`
   position: relative;
@@ -65,7 +66,7 @@ Topic.Summary = styled.div`
 const Footer = styled.div`
   position: absolute;
   width: 100px;
-  height: 400px;
+  height: 600px;
   left: 0;
   bottom: 0;
   visibility: hidden;
@@ -81,9 +82,9 @@ const Options = ({ dispatch, readhub }) => {
   const {
     topics,
     read,
-    loading,
   } = readhub;
   const footerRef = useRef(null);
+  const [showDetailModal, toggleDetailModal] = useState(false);
   useEffect(() => {
     dispatch({ type: 'readhub/fetchTopics' });
   }, [])
@@ -91,10 +92,11 @@ const Options = ({ dispatch, readhub }) => {
     let intersectionObserver = new IntersectionObserver((changes) => {
       if (!changes[0].isIntersecting) return;
       dispatch({ type: 'readhub/fetchTopics' });
-    }, {
-      threshold: .2,
     });
     intersectionObserver.observe(footerRef.current);
+    return () => {
+      intersectionObserver.disconnect();
+    }
   }, []);
 
   return (
@@ -105,7 +107,10 @@ const Options = ({ dispatch, readhub }) => {
             return (
               <Topic
                 key={topic.id}
-                onClick={() => dispatch({ type: 'readhub/markRead', payload: topic.id })}
+                onClick={() => {
+                  toggleDetailModal(true);
+                  dispatch({ type: 'readhub/markRead', payload: topic.id })
+                }}
                 read={read.includes(topic.id)}
               >
                 <Topic.Title title={topic.title}>
@@ -118,6 +123,11 @@ const Options = ({ dispatch, readhub }) => {
           })
         }
       </TopicList>
+      <Modal
+        showCloseButton
+        show={showDetailModal}
+        onClose={() => toggleDetailModal(false)}
+      >hello</Modal>
       <Footer ref={footerRef} />
     </Popup>
   );
