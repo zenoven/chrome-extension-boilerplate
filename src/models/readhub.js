@@ -12,8 +12,8 @@ export default {
       state.topics = state.topics.length && lastCursor ? state.topics.concat(data) : data;
     },
     markRead(state, payload) {
-      if (!state.status.read.includes(payload)) {
-        state.status.read.push(payload);
+      if (!state.read.includes(payload)) {
+        state.read.push(payload);
       }
     },
     toggleLoading(state, payload) {
