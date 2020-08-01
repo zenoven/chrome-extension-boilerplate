@@ -1,21 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { dayjs } from 'lib/util';
+import { dayjs, noop } from 'lib/util';
 import Modal from '../component/modal';
 
-const Popup = styled.div`
+const Page = styled.div`
   position: relative;
   width: 400px;
   margin: 0;
   padding: 0;
   font-size: 14px;
 `;
-const TopicList = styled.ul`
+const List = styled.ul`
   margin: 0;
   padding: 0;
 `;
-const Topic = styled.li`
+const Item = styled.div`
   list-style: none;
   padding: 16px;
   color: #777;
@@ -23,45 +23,93 @@ const Topic = styled.li`
   & + & {
     border-top: 1px solid #eee;
   }
-  &:hover {
-    color: #555;
-    background: #fafafa;
-  }
+  ${props => !props.showDetail && (`
+    &:hover {
+      color: #555;
+      background: #fafafa;
+    }
+  `)}
+
   ${props => props.read ? 'opacity: .5' : ''}
 `;
-Topic.Title = styled.h3`
+Item.Title = styled.h3`
   margin: 0;
   line-height: 1.5;
   list-style: none;
   color: #555;
   cursor: pointer;
   font-size: 14px;
-  ${Topic}:hover & {
-    color: #333;
-  }
+  ${props => !props.showDetail && (`
+    ${Item}:hover & {
+      color: #333;
+    }
+  `)}
 `;
-Topic.TitleContent = styled.div`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+Item.TitleContent = styled.div`
+  ${props => !props.showDetail && (`
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  `)}
   margin-right: 8px;
 `;
-Topic.PublishTime = styled.div`
+Item.PublishTime = styled.div`
   font-size: 12px;
   color: #888;
   font-weight: normal;
 `;
-Topic.Summary = styled.div`
-  display: ${props => !props.folded ? '-webkit-box' : 'none'};
-  -webkit-box-orient: vertical;
+Item.Summary = styled.div`
   margin-top: 10px;
   font-size: 12px;
   line-height: 18px;
-  height: 54px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 3;
+  ${props => !props.showDetail && (`
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    height: 54px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+  `)}
 `;
+
+const Topic = (props) => {
+  return (
+    <Item
+      onClick={props.onClick ? () => props.onClick(props) : noop}
+      read={props.read}
+      showDetail={props.showDetail}
+      as={props.as || 'div'}
+    >
+      <Item.Title title={props.title} showDetail={props.showDetail}>
+        <Item.TitleContent showDetail={props.showDetail}>{props.title}</Item.TitleContent>
+        <Item.PublishTime>{timeAgo(props.createdAt)}</Item.PublishTime>
+      </Item.Title>
+      <Item.Summary showDetail={props.showDetail}>{props.summary}</Item.Summary>
+    </Item>
+  )
+};
+Topic.defaultProps = {
+  showDetail: true
+}
+
+const TopicList = (props) => {
+  return (
+    <List>
+      {
+        props.items.map(topic => (
+          <Topic
+            as='li'
+            {...topic}
+            key={topic.id}
+            onClick={props.onClickItem || noop}
+            read={(props.readIds || []).includes(topic.id)}
+            showDetail={false}
+          />
+        ))
+      }
+    </List>
+  )
+};
 
 const Footer = styled.div`
   position: absolute;
@@ -77,17 +125,19 @@ const timeAgo = (anchor) => {
   return now.to(dayjs(anchor));
 }
 
-
 const Options = ({ dispatch, readhub }) => {
   const {
     topics,
-    read,
+    readIds,
+    viewingId
   } = readhub;
   const footerRef = useRef(null);
-  const [showDetailModal, toggleDetailModal] = useState(false);
+  const viewingTopic = viewingId && topics.find(item => item.id === viewingId);
+
   useEffect(() => {
     dispatch({ type: 'readhub/fetchTopics' });
   }, [])
+
   useEffect(() => {
     let intersectionObserver = new IntersectionObserver((changes) => {
       if (!changes[0].isIntersecting) return;
@@ -100,36 +150,27 @@ const Options = ({ dispatch, readhub }) => {
   }, []);
 
   return (
-    <Popup>
-      <TopicList>
-        {
-          topics.map(topic => {
-            return (
-              <Topic
-                key={topic.id}
-                onClick={() => {
-                  toggleDetailModal(true);
-                  dispatch({ type: 'readhub/markRead', payload: topic.id })
-                }}
-                read={read.includes(topic.id)}
-              >
-                <Topic.Title title={topic.title}>
-                  <Topic.TitleContent>{topic.title}</Topic.TitleContent>
-                  <Topic.PublishTime>{timeAgo(topic.createdAt)}</Topic.PublishTime>
-                </Topic.Title>
-                <Topic.Summary>{topic.summary}</Topic.Summary>
-              </Topic>
-            )
-          })
-        }
-      </TopicList>
+    <Page>
+      <TopicList
+        items={topics}
+        readIds={readIds}
+        onClickItem={(item) => {
+          dispatch({ type: 'readhub/updateViewingId', payload: item.id })
+          dispatch({ type: 'readhub/markRead', payload: item.id })
+        }}
+      />
       <Modal
         showCloseButton
-        show={showDetailModal}
-        onClose={() => toggleDetailModal(false)}
-      >hello</Modal>
+        show={viewingId}
+        textAlign='left'
+        onClose={() => dispatch({ type: 'readhub/updateViewingId', payload: null })}
+      >
+        {viewingTopic && (
+          <Topic {...viewingTopic} />
+        )}
+      </Modal>
       <Footer ref={footerRef} />
-    </Popup>
+    </Page>
   );
 }
 

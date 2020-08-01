@@ -37,4 +37,6 @@ export const fetchWithPrefix = (prefix) => (...args) => {
   return fetch(url, ...(args.slice(1)));
 };
 
+export const noop = () => { };
+
 export {dayjs};

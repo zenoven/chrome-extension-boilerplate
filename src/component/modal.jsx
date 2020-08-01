@@ -62,7 +62,7 @@ export default (props) => {
   return ReactDOM.createPortal(
     <Wrapper>
       <Mask onClick={props.onClose} />
-      <Main width={props.width}>
+      <Main width={props.width} textAlign={props.textAlign}>
         {props.showCloseButton && (
           <CloseButton
             onClick={props.onClose}

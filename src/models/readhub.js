@@ -3,8 +3,9 @@ const defaultPageSize = 20;
 export default {
   state: {
     topics: [],
-    read: [],
+    readIds: [],
     loading: false,
+    viewingId: null,
   },
   reducers: {
     updateTopics(state, payload) {
@@ -12,9 +13,12 @@ export default {
       state.topics = state.topics.length && lastCursor ? state.topics.concat(data) : data;
     },
     markRead(state, payload) {
-      if (!state.read.includes(payload)) {
-        state.read.push(payload);
+      if (!state.readIds.includes(payload)) {
+        state.readIds.push(payload);
       }
+    },
+    updateViewingId(state, payload) {
+      state.viewingId = payload;
     },
     toggleLoading(state, payload) {
       state.loading = payload;
