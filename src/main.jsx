@@ -13,6 +13,7 @@ const store = init({
 });
 
 export const render = (path) => {
+  document.documentElement.classList.add(`page-${path}`)
   ReactDOM.render(
     (
       <Provider store={store}>

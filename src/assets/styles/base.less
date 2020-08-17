@@ -11,3 +11,29 @@ select,
 textarea{
   font:12px/1.5 "San Francisco",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif
 }
+
+:global {
+  :root {
+
+    &.page-popup {
+      position: relative;
+      width: 400px;
+      height: 600px;
+      overflow: hidden;
+      body {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+
+      }
+      &.with-modal-show {
+        body {
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}
+
+

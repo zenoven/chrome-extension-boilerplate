@@ -58,6 +58,12 @@ const CloseButton = styled.div`
   }
 `;
 export default (props) => {
+  useEffect(() => {
+    let root = document.documentElement;
+    let method = props.show ? 'add' : 'remove';
+    root.classList[method]('with-modal-show');
+    return () => root.classList.remove('with-modal-show');
+  });
   if (!props.show) return null;
   return ReactDOM.createPortal(
     <Wrapper>

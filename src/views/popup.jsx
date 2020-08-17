@@ -6,7 +6,6 @@ import Modal from '../component/modal';
 
 const Page = styled.div`
   position: relative;
-  width: 400px;
   margin: 0;
   padding: 0;
   font-size: 14px;

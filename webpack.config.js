@@ -109,11 +109,8 @@ module.exports = {
           loader: 'css-loader',
           options: {
             sourceMap: true,
-            modules: {
-              localIdentName: '[name]__[local]--[hash:base64:5]',
-            },
+            modules: true,
             import: true,
-
             importLoaders: 1,
           }
         },
