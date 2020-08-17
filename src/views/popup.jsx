@@ -16,13 +16,13 @@ const List = styled.ul`
 `;
 const Item = styled.div`
   list-style: none;
-  padding: 16px;
   color: #777;
   transition: all .15s ease-in-out;
   & + & {
     border-top: 1px solid #eee;
   }
   ${props => !props.showDetail && (`
+  padding: 16px;
     &:hover {
       color: #555;
       background: #fafafa;
@@ -59,16 +59,24 @@ Item.PublishTime = styled.div`
 `;
 Item.Summary = styled.div`
   margin-top: 10px;
-  font-size: 12px;
-  line-height: 18px;
-  ${props => !props.showDetail && (`
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    height: 54px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 3;
-  `)}
+  font-size: 14px;
+  line-height: 1.5;
+  ${props => !props.showDetail ?
+  (`
+      font-size: 12px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      height: ${12 * 1.5 * 3}px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 3;
+    `)
+    :
+    (`
+      margin: 20px 0 10px;
+      color: #444;
+    `)
+  }
 `;
 
 const Topic = (props) => {
