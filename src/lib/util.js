@@ -3,7 +3,7 @@ import fetch from './fetch';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import relativeTime from 'dayjs/plugin/relativeTime';
-export const c = Object.assign({}, chrome);
+export const c = Object.assign({}, chrome || {});
 dayjs.extend(relativeTime);
 dayjs.locale('zh-cn');
 
@@ -20,9 +20,8 @@ const promisifier = (method) => {
     })
   }
 };
-
 promisifiedChromeAPIs.forEach((apiName) => {
-  c[apiName] = Promise.promisifyAll(c[apiName], { promisifier});
+  c[apiName] && (c[apiName] = Promise.promisifyAll(c[apiName], { promisifier}));
 });
 
 export const getAllTabs = () => {

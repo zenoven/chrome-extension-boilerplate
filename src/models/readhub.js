@@ -1,5 +1,6 @@
 import { getTopics } from '../services/readhub';
 const defaultPageSize = 20;
+import { c } from 'lib/util';
 export default {
   state: {
     topics: [],
@@ -10,18 +11,26 @@ export default {
   reducers: {
     updateTopics(state, payload) {
       let { data, lastCursor } = payload;
-      state.topics = state.topics.length && lastCursor ? state.topics.concat(data) : data;
+      let topics = state.topics.length && lastCursor ? state.topics.concat(data) : data;
+      state.topics = topics;
+      return state;
     },
     markRead(state, payload) {
+      let ids = state.readIds.slice();
       if (!state.readIds.includes(payload)) {
-        state.readIds.push(payload);
+        ids.push(payload);
       }
+      state.readIds = ids;
+      return state;
+      // c.storage.sync.get('readhub', x => console.log('readhub:', x));
     },
     updateViewingId(state, payload) {
-      state.viewingId = payload;
+      // state.viewingId = payload;
+      return { ...state, viewingId: payload};
     },
     toggleLoading(state, payload) {
       state.loading = payload;
+      return state;
     }
   },
   effects: {
