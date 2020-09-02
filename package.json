@@ -15,7 +15,7 @@
     "@babel/core": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
-    "bestzip": "^2.1.5",
+    "bestzip": "^2.1.7",
     "bluebird": "^3.7.2",
     "chokidar": "^3.4.0",
     "chrome-i18n": "^1.0.2",
