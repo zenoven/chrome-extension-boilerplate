@@ -157,8 +157,6 @@ const Options = ({ dispatch, readhub }) => {
     }
   }, []);
 
-  console.log('readIds:', readIds);
-
   return (
     <Page>
       <TopicList

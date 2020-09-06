@@ -2,21 +2,28 @@ import persistPlugin from '@rematch/persist';
 import { init } from '@rematch/core';
 import immerPlugin from '@rematch/immer';
 import * as models from 'models';
-import { syncStorage, localStorage } from 'redux-persist-webextension-storage';
-import storage from 'redux-persist/lib/storage';
+import { syncStorage } from 'redux-persist-webextension-storage';
 
-const immer = immerPlugin();
 const persistConfig = {
-  key: 'readhub',
-  // whitelist: ['readhub'],
-  // storage: syncStorage,
-  storage: storage,
-  throttle: 2000,
+  key: 'root',
+  whitelist: ['readhub'],
+  storage: syncStorage,
+  throttle: 1000,
   version: 1,
-  debug: true,
+  // debug: true,
+};
+const nestedPersistConfig = {
+  readhub: {
+    key: 'readhub',
+    whitelist: ['readIds'],
+    storage: syncStorage,
+  }
 }
 
 export default init({
   models,
-  plugins: [persistPlugin(persistConfig), immer],
+  plugins: [
+    immerPlugin(),
+    persistPlugin(persistConfig, nestedPersistConfig),
+  ],
 });

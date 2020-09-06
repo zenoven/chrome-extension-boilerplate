@@ -371,26 +371,24 @@
   dependencies:
     mkdirp "^1.0.4"
 
-"@rematch/core@^1.4.0":
-  version "1.4.0"
-  resolved "https://r.cnpmjs.org/@rematch/core/download/@rematch/core-1.4.0.tgz#686ce814e1cf125029c5e9fba23ef3ab7c3eb2a7"
-  integrity sha1-aGzoFOHPElApxen7oj7zq3w+sqc=
-  dependencies:
-    redux "^4.0.5"
+"@rematch/core@^2.0.0-next.4":
+  version "2.0.0-next.4"
+  resolved "https://registry.yarnpkg.com/@rematch/core/-/core-2.0.0-next.4.tgz#a12c71d3fcd23aaaabe329cdb8143f01519bb0a9"
+  integrity sha512-kxrcqnpbySEg165QnOu5H5gjmY0Bz90yLM3hAzHZFGKewSGkxEi0ZtDc/cMpEYrZ/YzWYHAhYTXXAf3R4K4V5Q==
 
-"@rematch/immer@^1.2.0":
-  version "1.2.0"
-  resolved "https://r.cnpmjs.org/@rematch/immer/download/@rematch/immer-1.2.0.tgz#cf069e20ead97be8dfb26e71b61f025e024e936d"
-  integrity sha1-zwaeIOrZe+jfsm5xth8CXgJOk20=
+"@rematch/immer@^2.0.0-next.4":
+  version "2.0.0-next.4"
+  resolved "https://registry.yarnpkg.com/@rematch/immer/-/immer-2.0.0-next.4.tgz#94f47adee0a5a79d8c0d12471236be1b34b81a0a"
+  integrity sha512-hcg40b9zs8B8Zo8BwjvBFiJaDwuhOp7yYNeI1MaumLwXQ+bcoYEpQoN28WS6s4/FIKfE8CazO4tpA/Fxi/NL9g==
   dependencies:
-    immer "^4.0.0"
+    immer "^6.0.3"
 
-"@rematch/persist@^1.1.6":
-  version "1.1.6"
-  resolved "https://r.cnpmjs.org/@rematch/persist/download/@rematch/persist-1.1.6.tgz#6eba5e11cd6cac92d745a43f842866620c7a0880"
-  integrity sha1-brpeEc1srJLXRaQ/hChmYgx6CIA=
+"@rematch/persist@^2.0.0-next.4":
+  version "2.0.0-next.4"
+  resolved "https://registry.yarnpkg.com/@rematch/persist/-/persist-2.0.0-next.4.tgz#a93ed0c83b6fa30faffdf6d2032a18c93ad60bfe"
+  integrity sha512-Ve0qgfzP2/lBQ/TmhyMINu460xHxq7mc4QxFbxiQNrgfNlnqqsWfpDvY6Hmtt6lUGsLLXYfI/LrhH7fribpm3A==
   dependencies:
-    redux-persist "^5.10.0"
+    redux-persist "^6.0.0"
 
 "@types/anymatch@*":
   version "1.3.1"
@@ -3055,10 +3053,10 @@ image-size@~0.5.0:
   resolved "https://r.cnpmjs.org/image-size/download/image-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
   integrity sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=
 
-immer@^4.0.0:
-  version "4.0.2"
-  resolved "https://r.cnpmjs.org/immer/download/immer-4.0.2.tgz#9ff0fcdf88e06f92618a5978ceecb5884e633559"
-  integrity sha1-n/D834jgb5Jhill4zuy1iE5jNVk=
+immer@^6.0.3:
+  version "6.0.9"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-6.0.9.tgz#b9dd69b8e69b3a12391e87db1e3ff535d1b26485"
+  integrity sha512-SyCYnAuiRf67Lvk0VkwFvwtDoEiCMjeamnHvRfnVDyc7re1/rQrNxuL+jJ7lA3WvdC4uznrvbmm+clJ9+XXatg==
 
 import-cwd@^2.0.0:
   version "2.1.0"
@@ -4861,15 +4859,15 @@ redux-persist-webextension-storage@^1.0.2:
   resolved "https://r.cnpmjs.org/redux-persist-webextension-storage/download/redux-persist-webextension-storage-1.0.2.tgz#3021f49e5e5e0c359a64e6192edfe884f693a215"
   integrity sha1-MCH0nl5eDDWaZOYZLt/ohPaTohU=
 
-redux-persist@^5.10.0:
-  version "5.10.0"
-  resolved "https://r.cnpmjs.org/redux-persist/download/redux-persist-5.10.0.tgz#5d8d802c5571e55924efc1c3a9b23575283be62b"
-  integrity sha1-XY2ALFVx5Vkk78HDqbI1dSg75is=
+redux-persist@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-6.0.0.tgz#b4d2972f9859597c130d40d4b146fecdab51b3a8"
+  integrity sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==
 
 redux@^4.0.5:
   version "4.0.5"
-  resolved "https://r.cnpmjs.org/redux/download/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
-  integrity sha1-TbXeWBbheJHeioDEJCMtBvBR2T8=
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
+  integrity sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
   dependencies:
     loose-envify "^1.4.0"
     symbol-observable "^1.2.0"
@@ -5582,8 +5580,8 @@ supports-color@^6.1.0:
 
 symbol-observable@^1.2.0:
   version "1.2.0"
-  resolved "https://r.cnpmjs.org/symbol-observable/download/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
-  integrity sha1-wiaIrtTqs83C3+rLtWFmBWCgCAQ=
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+  integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
 
 tapable@^1.0.0, tapable@^1.1.3:
   version "1.1.3"
