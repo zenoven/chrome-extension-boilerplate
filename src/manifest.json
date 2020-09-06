@@ -9,9 +9,7 @@
     "default_icon": "assets/images/icons/512.png",
     "default_popup": "popup.html"
   },
-  "options_page": "options.html",
-
-  "permissions": ["contextMenus", "tabs", "storage", "https://api.readhub.cn/*"],
+  "permissions": ["storage", "https://api.readhub.cn/*"],
   "background": {
     "page": "background.html"
   },
