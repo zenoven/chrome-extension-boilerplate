@@ -1,6 +1,5 @@
 import { getTopics } from '../services/readhub';
 const defaultPageSize = 20;
-import { c } from 'lib/util';
 export default {
   state: {
     topics: [],

@@ -36,6 +36,10 @@ export const fetchWithPrefix = (prefix) => (...args) => {
   return fetch(url, ...(args.slice(1)));
 };
 
+export const clearStorage = (callback, type = 'sync') => {
+  return c.storage[type].clear(callback)
+}
+
 export const noop = () => { };
 
 export {dayjs};
