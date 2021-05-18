@@ -1,0 +1,36 @@
+:global {
+  @font-face {
+    font-family: "iconfont"; /* Project id 2555191 */
+    src: url('./iconfont.woff2?t=1621318115846') format('woff2'),
+        url('./iconfont.woff?t=1621318115846') format('woff'),
+        url('./iconfont.ttf?t=1621318115846') format('truetype');
+  }
+
+  .icon {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .icon-loading:before {
+    content: "\e6a6";
+  }
+
+  .icon-loading :local{
+    display: inline-block;
+    animation: rotate 1.5s infinite linear;
+  }
+  @keyframes rotate {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+
+

@@ -48,6 +48,11 @@ export default {
       }
       let response = await getTopics(payload) || [];
       this.updateTopics({ data: response.data, lastCursor });
+      // await new Promise((resolve) => {
+      //   setTimeout(resolve, 15000)
+      // }).then(() => {
+      //   this.toggleLoading(false);
+      // })
       this.toggleLoading(false);
     },
   },

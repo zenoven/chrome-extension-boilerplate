@@ -17,13 +17,18 @@ const Main = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
-  width: ${props => props.width || '300px'};
+  width: ${props => (props.width ? props.width : '300px')};
+  height: ${props => (props.height ? props.height : 'auto')};
   text-align: ${props => props.textAlign || 'center'};
   transform: translate(-50%, -50%);
-  background: #fff;
+  background: ${props => props.background || '#fff'};
   padding: 20px;
   border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0,0,0, .3);
+  ${props => (
+  !props.hideBoxShadow && `
+    box-shadow: 0 0 5px rgba(0,0,0, .3);
+  `
+  )}
 `;
 const CloseButton = styled.div`
   position: absolute;
@@ -67,8 +72,16 @@ export default (props) => {
   if (!props.show) return null;
   return ReactDOM.createPortal(
     <Wrapper>
-      <Mask onClick={props.onClose} />
-      <Main width={props.width} textAlign={props.textAlign}>
+      {
+        !props.hideMask && <Mask onClick={props.onClose} />
+      }
+      <Main
+        width={props.width}
+        height={props.height}
+        textAlign={props.textAlign}
+        hideBoxShadow={props.hideMask}
+        background={props.background}
+        >
         {props.showCloseButton && (
           <CloseButton
             onClick={props.onClose}

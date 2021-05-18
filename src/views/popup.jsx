@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { dayjs, noop } from 'lib/util';
 import Modal from '../component/modal';
+import Loading from '../component/loading';
 
 const Page = styled.div`
   position: relative;
@@ -137,7 +138,8 @@ const Options = ({ dispatch, readhub }) => {
   const {
     topics,
     readIds,
-    viewingId
+    viewingId,
+    loading,
   } = readhub;
   const footerRef = useRef(null);
   const viewingTopic = viewingId && topics.find(item => item.id === viewingId);
@@ -178,6 +180,7 @@ const Options = ({ dispatch, readhub }) => {
         )}
       </Modal>
       <Footer ref={footerRef} />
+      {loading && <Loading hideMask size={20} />}
     </Page>
   );
 }
