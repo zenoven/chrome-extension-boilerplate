@@ -180,7 +180,7 @@ const Options = ({ dispatch, readhub }) => {
         )}
       </Modal>
       <Footer ref={footerRef} />
-      {loading && <Loading hideMask size={20} />}
+      {loading && <Loading />}
     </Page>
   );
 }

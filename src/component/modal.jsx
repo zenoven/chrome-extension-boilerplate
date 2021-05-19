@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import {noop} from 'lib/util'
 
 const Wrapper = styled.div`
   position: fixed;
@@ -17,11 +19,11 @@ const Main = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
-  width: ${props => (props.width ? props.width : '300px')};
-  height: ${props => (props.height ? props.height : 'auto')};
-  text-align: ${props => props.textAlign || 'center'};
+  width: ${props => props.width };
+  height: ${props => props.height};
+  text-align: ${props => props.textAlign};
   transform: translate(-50%, -50%);
-  background: ${props => props.background || '#fff'};
+  background: ${props => props.background};
   padding: 20px;
   border-radius: 4px;
   ${props => (
@@ -62,12 +64,16 @@ const CloseButton = styled.div`
     width: 70%;
   }
 `;
-export default (props) => {
+const Modal = (props) => {
   useEffect(() => {
     let root = document.documentElement;
     let method = props.show ? 'add' : 'remove';
     root.classList[method]('with-modal-show');
-    return () => root.classList.remove('with-modal-show');
+    props.onShow && props.onShow();
+    return () => {
+      root.classList.remove('with-modal-show');
+      props.onHide && props.onHide();
+    };
   });
   if (!props.show) return null;
   return ReactDOM.createPortal(
@@ -92,3 +98,26 @@ export default (props) => {
     </Wrapper>,
     document.body);
 }
+
+Modal.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+  textAlign: PropTypes.string,
+  background: PropTypes.string,
+  hideMask: PropTypes.bool,
+  showCloseButton: PropTypes.bool,
+  onClose: PropTypes.func,
+  onShow: PropTypes.func,
+  onHide: PropTypes.func,
+};
+
+Modal.defaultProps = {
+  width: '300px',
+  height: 'auto',
+  textAlign: 'center',
+  background: '#fff',
+  hideMask: false,
+  showCloseButton: false,
+  onClose: noop,
+}
+export default Modal;
