@@ -10,7 +10,9 @@ const Page = styled.div`
   margin: 0;
   padding: 0;
   font-size: 14px;
-  /* opacity: .4; */
+  .loading & {
+    opacity: .4;
+  }
 `;
 const List = styled.ul`
   margin: 0;

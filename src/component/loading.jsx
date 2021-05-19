@@ -36,5 +36,6 @@ Loading.propTypes = {
 Loading.defaultProps = {
   hideMask: true,
   size: 20,
-}
+};
+
 export default Loading;
