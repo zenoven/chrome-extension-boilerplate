@@ -147,10 +147,6 @@ const Options = ({ dispatch, readhub }) => {
   const viewingTopic = viewingId && topics.find(item => item.id === viewingId);
 
   useEffect(() => {
-    dispatch({ type: 'readhub/fetchTopics' });
-  }, [])
-
-  useEffect(() => {
     let intersectionObserver = new IntersectionObserver((changes) => {
       if (!changes[0].isIntersecting) return;
       dispatch({ type: 'readhub/fetchTopics' });
