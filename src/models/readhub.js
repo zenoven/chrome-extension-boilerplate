@@ -37,7 +37,9 @@ export default {
         }
       } = rootState;
       if (loading) return;
-      this.toggleLoading(true);
+      let loadingTimer = setTimeout(() => {
+        this.toggleLoading(true);
+      }, 300);
       let lastCursor = '';
       if (topics.length) {
         lastCursor = topics[topics.length - 1].order;
@@ -47,6 +49,7 @@ export default {
         payload.pageSize = defaultPageSize;
       }
       let response = await getTopics(payload) || [];
+      loadingTimer && clearTimeout(loadingTimer);
       this.updateTopics({ data: response.data, lastCursor });
       // await new Promise((resolve) => {
       //   setTimeout(resolve, 15000)
