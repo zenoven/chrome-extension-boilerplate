@@ -136,7 +136,7 @@ const timeAgo = (anchor) => {
   return now.to(dayjs(anchor));
 }
 
-const Options = ({ dispatch, readhub }) => {
+const Popup = ({ dispatch, readhub }) => {
   const {
     topics,
     readIds,
@@ -185,4 +185,4 @@ const Options = ({ dispatch, readhub }) => {
 
 export default connect(({ readhub }) => ({
   readhub,
-}))(Options);
+}))(Popup);
