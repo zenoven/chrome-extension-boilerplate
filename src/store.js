@@ -9,7 +9,7 @@ const persistConfig = {
   key: 'root',
   whitelist: ['readhub'],
   storage: syncStorage,
-  throttle: 1000,
+  throttle: 300,
   version: 1,
   // debug: true,
 };
@@ -21,9 +21,9 @@ const nestedPersistConfig = {
     storage: syncStorage,
   }
 }
-clearStorage(() => {
-  console.log('cleared');
-})
+// clearStorage(() => {
+//   console.log('cleared');
+// })
 
 c.storage.sync.get(null, (value) => {
   console.log(value)
@@ -33,6 +33,6 @@ export default init({
   models,
   plugins: [
     immerPlugin(),
-    // persistPlugin(persistConfig, nestedPersistConfig),
+    persistPlugin(persistConfig, nestedPersistConfig),
   ],
 });
