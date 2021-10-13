@@ -4,7 +4,7 @@ import Loading from '../component/loading';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Readhub from './readhub';
-import {noop} from 'lib/util'
+import {noop, useMobileUA} from 'lib/util'
 const TabsWrapper = styled.div`
 position: absolute;
 top: 0;
@@ -62,8 +62,26 @@ transition: all .3s;
 const IFrame = (props) => {
   let { active, loaded } = props;
   if (!active && !loaded) return null;
+  const iframeRef = useRef(null);
+  const onLoad = () => {
+    props.onLoad();
+    if (props.forceMobile) {
+      console.log('force')
+      console.log(iframeRef.current)
+      window.iframeRef = iframeRef.current;
+      // useMobileUA(iframeRef.current.contentWindow); // not working, iframeRef.current.contentWindow has no navigator prop
+      // console.log(iframeRef.current.contentWindow.userAgent.navigator)
+    }
+  }
+
   return <>
-    <iframe {...props} src={props.src} frameborder="0"></iframe>
+    <iframe
+      ref={iframeRef}
+      className={props.className || ''}
+      src={props.src}
+      frameBorder={0}
+      onLoad={onLoad}
+    />
     {!loaded && <Loading hideMask />}
   </>;
 }
@@ -87,20 +105,21 @@ const tabs = [
   {
     key: 'cnBeta',
     text: 'cnBeta',
-    component: (props) => {
-      return (
-        <StyledIframe {...props} onLoad={props.onLoad || noop} src={'https://m.cnbeta.com'}></StyledIframe>
-      )
-    },
+    component: StyledIframe,
+    url: 'https://m.cnbeta.com',
   },
   {
-    key: 'frame',
-    text: '网址',
-    component: (props) => {
-      return (
-        <StyledIframe {...props} onLoad={props.onLoad || noop} src={props.src || 'https://m.baidu.com'}></StyledIframe>
-      )
-    },
+    key: 'weibo',
+    text: '微博',
+    component: StyledIframe,
+    url: 'https://m.weibo.cn',
+  },
+  {
+    key: 'v2ex',
+    text: 'V2EX',
+    component: StyledIframe,
+    url: 'https://v2ex.com',
+    forceMobile: true,
   },
 ];
 const Popup = (props) => {
@@ -134,18 +153,22 @@ const Popup = (props) => {
         tabs.map((tab, index) => {
           let ContentComponent = tab.component;
           let tabLoaded = loadedKeys.includes(tab.key);
+          let contentComponentProps = {
+            active: activeTab === tab,
+            loaded: tabLoaded,
+          };
+          if (tab.url) {
+            contentComponentProps = {
+              ...contentComponentProps,
+              src: tab.url,
+              onLoad: () => props.dispatch({ type: 'popup/markTabLoaded', payload: tab.key }),
+              forceMobile: tab.forceMobile,
+            }
+          }
+
           return (
             <TabContent key={tab.key} style={{transform: `translateX(${(index - activeIndex) * 100}%)`}}>
-              <ContentComponent
-                active={activeTab === tab}
-                loaded={tabLoaded}
-                onLoad={tab.key === 'readhub'
-                  ? noop
-                  : () => {
-                    props.dispatch({ type: 'popup/markTabLoaded', payload: tab.key })
-                  }
-                }
-              />
+              <ContentComponent {...contentComponentProps} />
             </TabContent>
           )
         })

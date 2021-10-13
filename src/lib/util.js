@@ -7,6 +7,7 @@ export const c = Object.assign({}, chrome || {});
 dayjs.extend(relativeTime);
 dayjs.locale('zh-cn');
 
+const mobileUA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1';
 const promisifiedChromeAPIs = ['windows', 'tabs', 'browserAction'];
 const promisifier = (method) => {
   return function (...args) {
@@ -42,4 +43,13 @@ export const clearStorage = (callback, type = 'sync') => {
 
 export const noop = () => { };
 
-export {dayjs};
+export { dayjs };
+
+export const useMobileUA = (win) => {
+  if (win.navigator.userAgent !== mobileUA) {
+    Object.defineProperty(win.navigator, 'userAgent', {
+      value: mobileUA,
+      writable: false
+    });
+  }
+}

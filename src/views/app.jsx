@@ -8,7 +8,7 @@ const routes = {
   }
 };
 
-const APP = ({path}) => {
+const APP = ({ path }) => {
   let { View } = routes[path];
   return (
     <View />
