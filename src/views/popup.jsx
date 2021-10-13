@@ -23,9 +23,18 @@ background: #fff;
 margin: 0 0 10px;
 display: flex;
 padding: 0;
+&:after {
+  transition: left .3s;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: ${props => (100 / props.tabsCount).toFixed(3)}%;
+  left: ${props => (100 * props.activeIndex / props.tabsCount).toFixed(3)}%;
+  height: 1px;
+  background: #1890ff;
+}
 `
 const TabItem = styled.li`
-position: relative;
 padding: 0;
 flex: 1;
 border-bottom: 1px solid #ccc;
@@ -34,18 +43,9 @@ height: 40px;
 line-height: 40px;
 text-align: center;
 cursor: pointer;
+user-select: none;
 ${props => props.active && (`
-  color: #1890ff;
-  font-weight: bold;
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: currentColor;
-  }
+  color: #0281f8;
 `)}
 `;
 
@@ -115,7 +115,7 @@ const Popup = (props) => {
   const activeTab = tabs[activeIndex];
   return (
     <TabsWrapper className={names}>
-      <TabList>
+      <TabList tabsCount={tabs.length} activeIndex={activeIndex}>
         {
           tabs.map((tab) => {
             return (
