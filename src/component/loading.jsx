@@ -11,7 +11,10 @@ const Loading = (props) => {
     style.color = props.color;
   }
   let root = document.documentElement;
-
+  let icon = <i className="icon icon-loading" style={style}></i>
+  if (!props.showAsModal) {
+    return icon;
+  }
   return (
     <Modal
       show
@@ -22,18 +25,20 @@ const Loading = (props) => {
       onShow={() => root.classList && root.classList.add('loading')}
       onHide={() => root.classList && root.classList.remove('loading')}
     >
-      <i className="icon icon-loading" style={style}></i>
+      {icon}
     </Modal>
   )
 };
 
 Loading.propTypes = {
+  showAsModal: PropTypes.bool,
   hideMask: PropTypes.bool,
   size: PropTypes.number,
   color: PropTypes.string,
 };
 
 Loading.defaultProps = {
+  showAsModal: true,
   hideMask: true,
   size: 20,
 };
