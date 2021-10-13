@@ -9,8 +9,9 @@ const TabsWrapper = styled.div`
 position: absolute;
 top: 0;
 left: 0;
-right: 0;
-bottom: 0;
+width: 100%;
+height: 100%;
+overflow: hidden;
 `
 
 const TabList = styled.ul`
@@ -19,21 +20,32 @@ top: 0;
 left: 0;
 right: 0;
 background: #fff;
-margin: 10px 16px;
+margin: 0 0 10px;
 display: flex;
 padding: 0;
 `
 const TabItem = styled.li`
-padding: 0 10px;
+position: relative;
+padding: 0;
 flex: 1;
 border-bottom: 1px solid #ccc;
 list-style: none;
-height: 30px;
-line-height: 30px;
+height: 40px;
+line-height: 40px;
 text-align: center;
 cursor: pointer;
 ${props => props.active && (`
-  border-bottom-color: #1890ff;
+  color: #1890ff;
+  font-weight: bold;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: currentColor;
+  }
 `)}
 `;
 
@@ -52,7 +64,7 @@ const IFrame = (props) => {
   if (!active && !loaded) return null;
   return <>
     <iframe {...props} src={props.src} frameborder="0"></iframe>
-    {!loaded && <Loading />}
+    {!loaded && <Loading hideMask />}
   </>;
 }
 const StyledIframe = styled(IFrame)`
