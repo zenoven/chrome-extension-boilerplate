@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import Popup from 'views/popup';
 import '../assets/styles/base.less';
@@ -15,4 +14,4 @@ const APP = ({ path }) => {
   )
 };
 
-export default hot(APP);
+export default APP;

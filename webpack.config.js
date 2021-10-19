@@ -18,9 +18,9 @@ glob.sync('*.html', { cwd: srcPath })
     let chunk = filePath.slice(0, path.extname(filePath).length * -1);
     let result = [`./${chunk}`];
     entry[chunk] = result;
-    if (!noReactHotLoaderChunks.includes(chunk)) {
-      entry[chunk] = ['react-hot-loader/patch'].concat(result);
-    }
+    // if (!noReactHotLoaderChunks.includes(chunk)) {
+    //   entry[chunk] = ['react-hot-loader/patch'].concat(result);
+    // }
   })
 
 const getExtraPlugins = () => {
@@ -40,10 +40,11 @@ module.exports = {
   context: srcPath,
   output: {
     path: distPath,
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    globalObject: 'this',
   },
   watch: env === 'development',
-  devtool: env === 'development' && 'eval-source-map',
+  devtool: env === 'development' && 'cheap-module-source-map',
   module: {
     rules: [
       {

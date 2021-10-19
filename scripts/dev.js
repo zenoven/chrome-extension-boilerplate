@@ -41,8 +41,8 @@ const devServerConfig = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': '*',
   },
-  hot: true,
-  hotOnly: true,
+  hot: false,
+  // hotOnly: true,
   disableHostCheck: true,
   contentBase: distPath,
   watchOptions: {
