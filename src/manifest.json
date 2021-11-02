@@ -9,7 +9,7 @@
     "default_icon": "assets/images/icons/512.png",
     "default_popup": "popup.html"
   },
-  "permissions": ["storage", "https://api.readhub.cn/*"],
+  "permissions": ["storage", "https://api.readhub.cn/*", "webRequest", "webRequestBlocking", "<all_urls>"],
   "background": {
     "page": "background.html"
   },

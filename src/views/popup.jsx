@@ -4,7 +4,10 @@ import Loading from '../component/loading';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Readhub from './readhub';
-import {noop, useMobileUA} from 'lib/util'
+
+const tabItemHeight = 40;
+const tabItemBorderSize = 2;
+const activeColor = '#175ae2';
 const TabsWrapper = styled.div`
 position: absolute;
 top: 0;
@@ -15,14 +18,17 @@ overflow: hidden;
 `
 
 const TabList = styled.ul`
+display: flex;
 position: absolute;
 top: 0;
 left: 0;
 right: 0;
 background: #fff;
-margin: 0 0 10px;
-display: flex;
+margin: 0;
 padding: 0;
+box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+z-index: 1;
+font-size: 14px;
 &:after {
   transition: left .3s;
   content: '';
@@ -30,8 +36,8 @@ padding: 0;
   bottom: 0;
   width: ${props => (100 / props.tabsCount).toFixed(3)}%;
   left: ${props => (100 * props.activeIndex / props.tabsCount).toFixed(3)}%;
-  height: 1px;
-  background: #1890ff;
+  height: ${tabItemBorderSize}px;
+  background: ${activeColor};
 }
 `
 const TabItem = styled.li`
@@ -39,19 +45,19 @@ padding: 0;
 flex: 1;
 border-bottom: 1px solid #ccc;
 list-style: none;
-height: 40px;
-line-height: 40px;
+height: ${tabItemHeight}px;
+line-height: ${tabItemHeight}px;
 text-align: center;
 cursor: pointer;
 user-select: none;
 ${props => props.active && (`
-  color: #0281f8;
+  color: ${activeColor};
 `)}
 `;
 
 const TabContent = styled.div`
 position: absolute;
-top: 51px;
+top: ${tabItemHeight + tabItemBorderSize}px;
 left: 0;
 right: 0;
 bottom: 0;
@@ -118,7 +124,14 @@ const tabs = [
     key: 'v2ex',
     text: 'V2EX',
     component: StyledIframe,
-    url: 'https://v2ex.com',
+    url: 'https://www.v2ex.com',
+    forceMobile: true,
+  },
+  {
+    key: 'google',
+    text: 'Google',
+    component: StyledIframe,
+    url: 'https://www.google.com.hk/m',
     forceMobile: true,
   },
 ];
