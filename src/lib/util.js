@@ -42,14 +42,9 @@ export const clearStorage = (callback, type = 'sync') => {
 }
 
 export const noop = () => { };
-
-export { dayjs };
-
-export const useMobileUA = (win) => {
-  if (win.navigator.userAgent !== mobileUA) {
-    Object.defineProperty(win.navigator, 'userAgent', {
-      value: mobileUA,
-      writable: false
-    });
-  }
+export const isValidLastSavedTime = (time) => {
+  if (!time) return false;
+  // 1 天之内
+  return dayjs().diff(dayjs(time)) < 24 * 60 * 60 * 1000;
 }
+export { dayjs, mobileUA };
