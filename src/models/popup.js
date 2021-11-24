@@ -2,6 +2,7 @@ export default {
   state: {
     activeKey: 'readhub',
     loadedKeys: ['readhub'],
+    urls: {}
   },
   reducers: {
     updateActiveKey(state, payload) {
