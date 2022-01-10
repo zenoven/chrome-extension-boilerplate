@@ -1,10 +1,8 @@
-import React, {useRef, useEffect} from 'react';
-import Page from '../component/page';
+import React, {useRef} from 'react';
 import Loading from '../component/loading';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Readhub from './readhub';
-import { isValidLastSavedTime } from '../lib/util';
 
 const backgroundPage = chrome.extension.getBackgroundPage();
 const tabItemHeight = 40;
@@ -222,25 +220,6 @@ const Popup = (props) => {
   } = props;
   const activeIndex = tabs.findIndex(x => x.key === activeKey);
   const activeTab = tabs[activeIndex];
-  useEffect(() => {
-
-    window.addEventListener('load', () => {
-      // 从 backgroundPage 恢复上次保存的 lastPopupBody
-      let lastSavedTime = backgroundPage.lastSavedTime;
-      backgroundPage.console.log('lastSavedTime:', lastSavedTime, 'backgroundPage:', backgroundPage)
-      if (isValidLastSavedTime(lastSavedTime) && backgroundPage && backgroundPage.lastPopupBody) {
-        backgroundPage.console.log('do restore')
-        // document.body.parentElement.replaceChild(document.importNode(backgroundPage.lastPopupBody, true), document.body);
-      }
-    });
-
-    window.addEventListener('unload', () => {
-      backgroundPage.lastPopupBody = document.body;
-      backgroundPage.lastSavedTime = Date.now();
-      backgroundPage.console.log('unload, backgroundPage.lastPopupBody', backgroundPage.lastPopupBody, 'backgroundPage.lastSavedTime', backgroundPage.lastSavedTime);
-    });
-
-  })
   return (
     <TabsWrapper className={names}>
       <TabList tabsCount={tabs.length} activeIndex={activeIndex}>
@@ -281,7 +260,7 @@ const Popup = (props) => {
                 if (!tabLoaded) {
                   props.dispatch({ type: 'popup/markTabLoaded', payload: tab.key })
                 }
-                console.log(iframe, event);;
+                console.log(iframe, event);
                 // props.dispatch({ type: 'popup/updateTabURL', payload: iframe })
               },
             }

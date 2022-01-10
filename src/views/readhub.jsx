@@ -128,7 +128,7 @@ const timeAgo = (anchor) => {
   return now.to(dayjs(anchor));
 }
 
-const Popup = ({ dispatch, readhub }) => {
+const Popup = ({ dispatch, readhub, active }) => {
   const {
     topics,
     readIds,
@@ -148,7 +148,7 @@ const Popup = ({ dispatch, readhub }) => {
       intersectionObserver.disconnect();
     }
   }, []);
-
+  if (!active) return null;
   return (
     <Page>
       <TopicList
