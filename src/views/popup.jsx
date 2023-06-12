@@ -183,7 +183,7 @@ const tabs = [
     key: 'cnBeta',
     text: 'cnBeta',
     component: StyledIframe,
-    url: 'https://m.cnbeta.com',
+    url: 'https://m.cnbeta.com.tw',
   },
   {
     key: 'weibo',
